@@ -1,7 +1,7 @@
 import styles from "./Register.module.css";
 import Notification from "../../share-component/Notification";
 import {useInput, useMessage} from "../../hooks";
-import {NavLink} from "react-router";
+import {Link, NavLink} from "react-router";
 
 const userNameValidation = (value) => {
   return value.trim() !== "";
@@ -145,11 +145,7 @@ const Register = () => {
 
         <div className={styles.register_container_registered}>
           <p>Already registerd ?</p>
-          <NavLink
-            to="/login"
-            className={styles.register_container_registered_link}>
-            Login
-          </NavLink>
+          <Link to="/login">Login</Link>
         </div>
       </div>
     </div>

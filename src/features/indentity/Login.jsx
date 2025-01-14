@@ -1,6 +1,6 @@
 import Notification from "../../share-component/Notification";
 import {useInput, useMessage} from "../../hooks";
-import {NavLink} from "react-router";
+import {Link} from "react-router";
 
 const emailValidation = (value) => {
   return value.includes("@");
@@ -49,8 +49,7 @@ const Login = () => {
 
       {/* Main Form */}
       <div className="relative z-10 p-10 max-w-md w-full bg-white/40 backdrop-blur-lg rounded-3xl shadow-xl border border-white/30 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-yellow-500/20 blur-xl opacity-75 rounded-3xl"></div>
-
+        {/* <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-yellow-500/20 blur-xl opacity-75 rounded-3xl"></div> */}
         <form
           onSubmit={handleSubmit}
           className="relative flex flex-col items-center justify-center gap-6 z-10">
@@ -110,11 +109,7 @@ const Login = () => {
 
         <div className="w-full flex flex-row justify-center items-center mt-8 gap-2">
           <p className="text-gray-600">Don't have an account?</p>
-          <NavLink
-            to="/register"
-            className="text-purple-700 font-bold hover:underline">
-            Register Now
-          </NavLink>
+          <Link to="/register">Register now</Link>
         </div>
       </div>
 
