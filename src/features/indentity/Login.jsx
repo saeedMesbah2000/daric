@@ -1,7 +1,6 @@
-import {NavLink} from "react-router-dom";
-import {useNavigate} from "react-router-dom";
-import Notification from "../../../share-component/Notification";
-import {useInput, useMessage} from "../../../hooks";
+import Notification from "../../share-component/Notification";
+import {useInput, useMessage} from "../../hooks";
+import {NavLink} from "react-router";
 
 const emailValidation = (value) => {
   return value.includes("@");
@@ -12,7 +11,6 @@ const passwordValidation = (value) => {
 };
 
 const Login = () => {
-  const navigate = useNavigate();
   const {showMessage, toastMessages, setToastMessages} = useMessage();
 
   const {
@@ -37,20 +35,6 @@ const Login = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    const response = {status: false};
-
-    if (response.status) {
-      navigate("/articles", {
-        state: {
-          loggedIn: true,
-          userName: response.data.user.username,
-          token: response.data.user.token,
-        },
-      });
-    } else {
-      showMessage("Wrong inputs");
-    }
   };
 
   return (
@@ -62,12 +46,6 @@ const Login = () => {
         <div className="absolute inset-0 animate-fluid-shapes"></div>
         <div className="absolute inset-0 animate-light-flares"></div>
       </div>
-
-      <Notification
-        hasError={true}
-        listOfMessages={toastMessages}
-        setListOfMessages={setToastMessages}
-      />
 
       {/* Main Form */}
       <div className="relative z-10 p-10 max-w-md w-full bg-white/40 backdrop-blur-lg rounded-3xl shadow-xl border border-white/30 overflow-hidden">
@@ -133,7 +111,7 @@ const Login = () => {
         <div className="w-full flex flex-row justify-center items-center mt-8 gap-2">
           <p className="text-gray-600">Don't have an account?</p>
           <NavLink
-            to="/Register"
+            to="/register"
             className="text-purple-700 font-bold hover:underline">
             Register Now
           </NavLink>

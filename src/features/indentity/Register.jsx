@@ -1,8 +1,7 @@
-import {NavLink} from "react-router-dom";
 import styles from "./Register.module.css";
-import {useNavigate} from "react-router-dom";
-import Notification from "../../../share-component/Notification";
-import {useInput, useMessage} from "../../../hooks";
+import Notification from "../../share-component/Notification";
+import {useInput, useMessage} from "../../hooks";
+import {NavLink} from "react-router";
 
 const userNameValidation = (value) => {
   return value.trim() !== "";
@@ -17,7 +16,6 @@ const passwordValidation = (value) => {
 };
 
 const Register = () => {
-  const navigate = useNavigate();
   const {showMessage, toastMessages, setToastMessages} = useMessage();
 
   const {
@@ -51,26 +49,6 @@ const Register = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    const response = {status: false};
-
-    if (response.status) {
-      navigate("/articles", {
-        state: {
-          loggedIn: true,
-          userName: response.data.user.username,
-          token: response.data.user.token,
-        },
-      });
-    } else {
-      for (const key in response.data) {
-        showMessage(key + " " + response.data[key]);
-      }
-    }
-
-    userNameOnResetHandler();
-    emailOnResetHandler();
-    passwordOnResetHandler();
   };
 
   return (

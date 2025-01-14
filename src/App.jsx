@@ -1,11 +1,8 @@
-import {useState} from "react";
-import {Home} from "./pages";
-import {Navigate} from "react-router-dom";
+import router from "./router";
+import {RouterProvider} from "react-router";
 
 function App() {
-  const [user, setUser] = useState({loggedIn: false});
-
-  return <>{user?.loggedIn ? <Home /> : <Navigate to={"/login"} />}</>;
+  return <RouterProvider router={router} />;
 }
 
 export default App;
