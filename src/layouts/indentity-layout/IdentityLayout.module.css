@@ -1,0 +1,170 @@
+/* Layout Wrapper */
+.identityLayout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Background Layers Container */
+.backgroundLayers {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+/* Gradient Layer 1 Animation */
+.animateGradientLayer1 {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(270deg, #ff7eb3, #65d6ce, #ffaf7b, #c47aff);
+  background-size: 800% 800%;
+  animation: gradient-layer1 12s ease infinite;
+}
+
+/* Gradient Layer 2 Animation */
+.animateGradientLayer2 {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(360deg, #a855f7, #10b981, #3b82f6, #facc15);
+  background-size: 600% 600%;
+  animation: gradient-layer2 18s ease infinite;
+  mix-blend-mode: overlay;
+}
+
+/* Glowing Shapes */
+.animateFluidShapes {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.animateFluidShapes div {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.6), transparent);
+  border-radius: 50%;
+  animation: float-shapes 6s ease-in-out infinite;
+  opacity: 0.8;
+  filter: blur(10px);
+}
+
+/* Add multiple shapes with different animations */
+.animateFluidShapes div:nth-child(1) {
+  top: 10%;
+  left: 20%;
+  animation-delay: 0s;
+}
+
+.animateFluidShapes div:nth-child(2) {
+  top: 30%;
+  left: 50%;
+  animation-delay: 1s;
+}
+
+.animateFluidShapes div:nth-child(3) {
+  top: 70%;
+  left: 30%;
+  animation-delay: 2s;
+}
+
+.animateFluidShapes div:nth-child(4) {
+  top: 50%;
+  left: 80%;
+  animation-delay: 3s;
+}
+
+.animateFluidShapes div:nth-child(5) {
+  top: 20%;
+  left: 70%;
+  animation-delay: 4s;
+}
+
+/* Light Flares Animation */
+.animateLightFlares {
+  position: absolute;
+  inset: 0;
+}
+
+.animateLightFlares div {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.8), transparent);
+  border-radius: 50%;
+  animation: flicker 3s ease-in-out infinite;
+  opacity: 0.9;
+}
+
+.animateLightFlares div:nth-child(1) {
+  top: 40%;
+  left: 60%;
+  animation-delay: 0s;
+}
+
+.animateLightFlares div:nth-child(2) {
+  top: 70%;
+  left: 40%;
+  animation-delay: 1s;
+}
+
+.animateLightFlares div:nth-child(3) {
+  top: 30%;
+  left: 80%;
+  animation-delay: 2s;
+}
+
+/* Keyframes */
+@keyframes gradient-layer1 {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes gradient-layer2 {
+  0% {
+    background-position: 50% 0%;
+  }
+  50% {
+    background-position: 50% 100%;
+  }
+  100% {
+    background-position: 50% 0%;
+  }
+}
+
+@keyframes float-shapes {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateY(-30px) translateX(20px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0) translateX(0);
+    opacity: 0.8;
+  }
+}
+
+@keyframes flicker {
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}

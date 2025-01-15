@@ -1,152 +1,62 @@
-import styles from "./Register.module.css";
-import Notification from "../../share-component/Notification";
-import {useInput, useMessage} from "../../hooks";
-import {Link, NavLink} from "react-router";
-
-const userNameValidation = (value) => {
-  return value.trim() !== "";
-};
-
-const emailValidation = (value) => {
-  return value.includes("@");
-};
-
-const passwordValidation = (value) => {
-  return value.trim() !== "";
-};
+import React, {useState} from "react";
+import {Link} from "react-router";
+import {Button, InputField} from "../../share-component";
 
 const Register = () => {
-  const {showMessage, toastMessages, setToastMessages} = useMessage();
-
-  const {
-    value: userNameValue,
-    inputIsValid: userNameIsValid,
-    hasError: userNameError,
-    onBlurHandler: userNameOnBlurHandler,
-    onChangeHandler: userNameOnChangeHandler,
-    onResetHandler: userNameOnResetHandler,
-  } = useInput(userNameValidation);
-
-  const {
-    value: emailValue,
-    inputIsValid: emailIsValid,
-    hasError: emailError,
-    onBlurHandler: emailOnBlurHandler,
-    onChangeHandler: emailOnChangeHandler,
-    onResetHandler: emailOnResetHandler,
-  } = useInput(emailValidation);
-
-  const {
-    value: passwordValue,
-    inputIsValid: passwordIsValid,
-    hasError: passwordError,
-    onBlurHandler: passwordOnBlurHandler,
-    onChangeHandler: passwordOnChangeHandler,
-    onResetHandler: passwordOnResetHandler,
-  } = useInput(passwordValidation);
-
-  const formIsValid = userNameIsValid && passwordIsValid && emailIsValid;
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
   };
 
   return (
-    <div className={styles.register}>
-      <Notification
-        hasError={true}
-        listOfMessages={toastMessages}
-        setListOfMessages={setToastMessages}
-      />
+    <div className="px-4 py-8 sm:p-10 max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl w-full bg-white/40 backdrop-blur-lg rounded-3xl shadow-xl border border-white/30 overflow-hidden mx-auto">
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col items-center gap-6">
+        <h2 className="text-2xl sm:text-3xl font-extrabold text-center text-gray-800">
+          <span className="bg-gradient-to-br from-yellow-600 to-yellow-500 bg-clip-text text-transparent">
+            ساخت حساب کاربری
+          </span>
+        </h2>
 
-      <div className={styles.register_container}>
-        <form onSubmit={handleSubmit}>
-          <p className={styles.register_container_form_header}>Register</p>
+        <InputField
+          id="username"
+          label="Username"
+          type="text"
+          placeholder="Enter your username"
+        />
 
-          <div class={`form-group ${styles.register_container_form_container}`}>
-            <label
-              for="exampleInputEmail1"
-              className={styles.register_container_form_label}>
-              User
-            </label>
+        <InputField
+          id="email"
+          label="Email"
+          type="email"
+          placeholder="Enter your email"
+        />
 
-            <input
-              type="text"
-              className={`form-control ${styles.register_container_form_input}`}
-              id="exampleInputEmail1"
-              aria-describedby="emailHelp"
-              value={userNameValue}
-              onChange={userNameOnChangeHandler}
-              onBlur={userNameOnBlurHandler}
-            />
+        <InputField
+          id="password"
+          label="Password"
+          type="password"
+          placeholder="Enter your password"
+        />
 
-            {userNameError && (
-              <div className={styles.register_container_form_error}>
-                wrong user name
-              </div>
-            )}
-          </div>
-
-          <div class={`form-group ${styles.register_container_form_container}`}>
-            <label
-              for="exampleInputEmail1"
-              className={styles.register_container_form_label}>
-              Email
-            </label>
-
-            <input
-              type="email"
-              className={`form-control ${styles.register_container_form_input}`}
-              id="exampleInputEmail1"
-              aria-describedby="emailHelp"
-              value={emailValue}
-              onChange={emailOnChangeHandler}
-              onBlur={emailOnBlurHandler}
-            />
-
-            {emailError && (
-              <div className={styles.register_container_form_error}>
-                wrong Email
-              </div>
-            )}
-          </div>
-
-          <div
-            className={`form-group ${styles.register_container_form_container}`}>
-            <label
-              for="exampleInputPassword1"
-              className={styles.register_container_form_label}>
-              Password
-            </label>
-
-            <input
-              type="password"
-              className={`form-control ${styles.register_container_form_input}`}
-              id="exampleInputPassword1"
-              onChange={passwordOnChangeHandler}
-              onBlur={passwordOnBlurHandler}
-              value={passwordValue}
-            />
-
-            {passwordError && (
-              <div className={styles.register_container_form_error}>
-                inValid password
-              </div>
-            )}
-          </div>
-
-          <button
-            type="submit"
-            className={`btn ${styles.register_container_form_button}`}
-            disabled={!formIsValid}>
-            Register
-          </button>
-        </form>
-
-        <div className={styles.register_container_registered}>
-          <p>Already registerd ?</p>
-          <Link to="/login">Login</Link>
-        </div>
+        <Button
+          type="submit"
+          text="Register"
+          loading={isLoading}
+          className="w-full"
+        />
+      </form>
+      <div className="flex justify-center items-center mt-8 gap-2">
+        <p className="text-gray-600 text-sm sm:text-base">
+          Already registered?
+        </p>
+        <Link
+          to="/login"
+          className="text-purple-500 hover:underline text-sm sm:text-base">
+          Login
+        </Link>
       </div>
     </div>
   );
