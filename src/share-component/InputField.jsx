@@ -1,5 +1,10 @@
 import React, {useState} from "react";
 
+/**
+ *
+ * @param {*} param0
+ * @returns
+ */
 const InputField = ({id, label, type, register, errors, validation}) => {
   const [isFocused, setIsFocused] = useState(false);
   const [hasValue, setHasValue] = useState(false);

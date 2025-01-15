@@ -1,10 +1,14 @@
 import React, {useState} from "react";
 import {useForm} from "react-hook-form";
-import {Link} from "react-router";
+import {Link, useNavigate} from "react-router";
 import {Button, InputField} from "../../share-component";
-
+/**
+ *
+ * @returns
+ */
 const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -17,8 +21,7 @@ const Login = () => {
     // Simulate an API call
     setTimeout(() => {
       setIsLoading(false);
-      alert("Form Submitted! Check the console for the data.");
-      console.log("Final Data:", data); // Log again after submission
+      navigate("/verification", {state: data.phoneNumber});
     }, 2000);
   };
 
@@ -38,11 +41,11 @@ const Login = () => {
           register={register}
           errors={errors}
           label="شماره تماس"
-          type="text"
+          type="number"
           validation={{
-            required: "شماره تماس الزامی است",
-            minLength: {value: 11, message: "شماره باید ۱۱ رقم باشد"},
-            maxLength: {value: 11, message: "شماره باید ۱۱ رقم باشد"},
+            required: "شماره تماس الزامی است!",
+            minLength: {value: 11, message: "شماره باید ۱۱ رقم باشد!"},
+            maxLength: {value: 11, message: "شماره باید ۱۱ رقم باشد!"},
           }}
         />
 

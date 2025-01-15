@@ -1,45 +1,71 @@
 import React, {useState} from "react";
-import {Link} from "react-router";
+import {useForm} from "react-hook-form";
+import {Link, useLocation} from "react-router";
 import {Button, InputField} from "../../share-component";
 
 const Verification = () => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState();
+  const {state} = useLocation();
+  const {
+    register,
+    handleSubmit,
+    formState: {errors},
+  } = useForm();
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const onSubmit = (data) => {
+    setIsLoading(true);
+    console.log("Form Data Submitted:", data); // Log the data
+    // Simulate an API call
+    setTimeout(() => {
+      setIsLoading(false);
+      alert("Form Submitted! Check the console for the data.");
+      console.log("Final Data:", data); // Log again after submission
+    }, 2000);
   };
 
+  console.log(state);
+
   return (
-    <div className="w-full md:w-[350px] px-4 py-8 sm:p-10 max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl  bg-white/40 backdrop-blur-lg rounded-3xl shadow-xl border border-white/30 overflow-hidden mx-auto">
+    <div className="w-full md:w-[370px] px-4 py-8 sm:p-10 max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl  bg-white/40 backdrop-blur-lg rounded-3xl shadow-xl border border-white/30 overflow-hidden mx-auto">
       <form
-        onSubmit={handleSubmit}
-        className="h-[350px] flex flex-col items-center gap-8 justify-between">
+        onSubmit={handleSubmit(onSubmit)}
+        className="h-[350px] flex flex-col gap-6 justify-between">
         <h2 className="text-2xl sm:text-3xl font-extrabold text-center text-gray-800 mb-4">
           <span className="bg-gradient-to-br from-yellow-600 to-yellow-500 bg-clip-text text-transparent">
             ورود به دریک
           </span>
         </h2>
 
-        <InputField id="username" label="Username" type="text" />
+        <div>
+          <InputField
+            id="phoneNumber"
+            register={register}
+            errors={errors}
+            label="کد تایید"
+            type="number"
+            validation={{
+              required: "شماره تماس الزامی است!",
+              minLength: {value: 6, message: "کد تايید باید ۶ رقم باشد!"},
+              maxLength: {value: 6, message: "کد تايید باید ۶ رقم باشد!"},
+            }}
+          />
 
-        <InputField id="password" label="Password" type="password" />
+          <p className="mt-8">
+            کد به شماره{" "}
+            <span className="text-purple-500 hover:underline text-sm sm:text-base">
+              {state}
+            </span>{" "}
+            ارسال شد.
+          </p>
+        </div>
 
         <Button
           type="submit"
-          text="تایید و ارسال کد"
+          text="تایید صحت"
           loading={isLoading}
           className="w-full"
         />
       </form>
-
-      <div className="flex justify-center items-center mt-8 gap-2">
-        <p className="text-gray-600 text-sm sm:text-base">اکانت نداری؟ </p>
-        <Link
-          to="/register"
-          className="text-purple-500 hover:underline text-sm sm:text-base">
-          الان بساز
-        </Link>
-      </div>
     </div>
   );
 };
