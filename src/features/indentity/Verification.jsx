@@ -1,11 +1,12 @@
 import React, {useState} from "react";
 import {useForm} from "react-hook-form";
-import {Link, useLocation} from "react-router";
+import {Link, useLocation, useNavigate} from "react-router";
 import {Button, InputField} from "../../share-component";
 
 const Verification = () => {
   const [isLoading, setIsLoading] = useState();
   const {state} = useLocation();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -14,12 +15,14 @@ const Verification = () => {
 
   const onSubmit = (data) => {
     setIsLoading(true);
-    console.log("Form Data Submitted:", data); // Log the data
-    // Simulate an API call
+    console.log(data);
+
+    debugger;
     setTimeout(() => {
       setIsLoading(false);
-      alert("Form Submitted! Check the console for the data.");
-      console.log("Final Data:", data); // Log again after submission
+      if (data.verificationCode === "123456") {
+        navigate("/home");
+      }
     }, 2000);
   };
 
@@ -38,7 +41,7 @@ const Verification = () => {
 
         <div>
           <InputField
-            id="phoneNumber"
+            id="verificationCode"
             register={register}
             errors={errors}
             label="کد تایید"

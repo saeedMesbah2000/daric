@@ -1,0 +1,106 @@
+.animateFluidShapes {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1; /* To ensure it stays behind other content */
+}
+
+.animateFluidShapes div {
+  position: absolute;
+  border-radius: 50%;
+  animation: float-shapes 8s ease-in-out infinite;
+  opacity: 0.8;
+  filter: blur(15px);
+  background-size: 100% 100%;
+  transition: all 0.3s ease;
+}
+
+.animateFluidShapes div:nth-child(1) {
+  top: 80%;
+  left: 10%;
+  width: 40px;
+  height: 40px;
+  background: radial-gradient(
+    circle,
+    rgba(255, 0, 150, 0.6),
+    rgba(0, 204, 255, 0.6),
+    rgba(255, 158, 0, 0.6),
+    rgba(255, 0, 204, 0.6)
+  );
+  animation-delay: 0s;
+}
+
+.animateFluidShapes div:nth-child(2) {
+  top: 30%;
+  left: 25%;
+  width: 40px;
+  height: 40px;
+  background: radial-gradient(
+    circle,
+    rgba(255, 158, 0, 0.6),
+    rgba(0, 204, 255, 0.6),
+    rgba(255, 0, 150, 0.6),
+    rgba(255, 0, 204, 0.6)
+  );
+  animation-delay: 1s;
+}
+
+.animateFluidShapes div:nth-child(3) {
+  top: 15%;
+  left: 70%;
+  width: 40px;
+  height: 40px;
+  background: radial-gradient(
+    circle,
+    rgba(0, 204, 255, 0.6),
+    rgba(255, 0, 150, 0.6),
+    rgba(255, 158, 0, 0.6),
+    rgba(0, 204, 255, 0.6)
+  );
+  animation-delay: 2s;
+}
+
+.animateFluidShapes div:nth-child(4) {
+  top: 60%;
+  left: 50%;
+  width: 30px;
+  height: 30px;
+  background: radial-gradient(
+    circle,
+    rgba(0, 204, 255, 0.6),
+    rgba(255, 0, 150, 0.6),
+    rgba(255, 158, 0, 0.6),
+    rgba(255, 0, 204, 0.6)
+  );
+  animation-delay: 3s;
+}
+
+.animateFluidShapes div:nth-child(5) {
+  top: 80%;
+  left: 80%;
+  width: 40px;
+  height: 40px;
+  background: radial-gradient(
+    circle,
+    rgba(255, 0, 204, 0.6),
+    rgba(255, 0, 150, 0.6),
+    rgba(0, 204, 255, 0.6),
+    rgba(255, 158, 0, 0.6)
+  );
+  animation-delay: 4s;
+}
+
+@keyframes float-shapes {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateY(-60px) translateX(50px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0) translateX(0);
+    opacity: 0.8;
+  }
+}
