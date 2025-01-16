@@ -40,7 +40,7 @@ const Button = ({
               fill="none"
               d="M4 12a8 8 0 018-8V4a12 12 0 00-12 12h4z"></path>
           </svg>
-          Loading...
+          درحال ارسال...
         </div>
       ) : (
         text

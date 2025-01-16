@@ -17,7 +17,6 @@ const Verification = () => {
     setIsLoading(true);
     console.log(data);
 
-    debugger;
     setTimeout(() => {
       setIsLoading(false);
       if (data.verificationCode === "123456") {
