@@ -1,3 +1,5 @@
+import React from "react";
+import {useParams, Navigate} from "react-router";
 import {createBrowserRouter} from "react-router";
 import IdentityLayout from "./layouts/indentity-layout/IdentityLayout";
 import {Login, Register, Verification} from "./features";
@@ -11,38 +13,36 @@ import {
   Settings,
   Support,
 } from "./pages";
+import ProtectedRoutes from "./ProtectedRoutes";
 
-import React from "react";
-import {useParams, Navigate} from "react-router";
+const routeMapping = {
+  home: <Home />,
+  aboutUs: <AboutUs />,
+  profile: <Profile />,
+  rules: <Rules />,
+  settings: <Settings />,
+  support: <Support />,
+};
 
 const RouteWithParams = () => {
   const {routeName} = useParams();
 
-  switch (routeName) {
-    case "home":
-      return <Home />;
-    case "aboutUs":
-      return <AboutUs />;
-    case "profile":
-      return <Profile />;
-    case "rules":
-      return <Rules />;
-    case "settings":
-      return <Settings />;
-    case "support":
-      return <Support />;
-    default:
-      return <Navigate to="/404" />;
-  }
+  return routeMapping[routeName];
 };
 
 const router = createBrowserRouter([
   {
     element: <MainLayout />,
-    path: "/", // Main layout will be on the root
     children: [
       // Route with dynamic 'routeName' parameter
-      {path: "/:routeName", element: <RouteWithParams />},
+      {
+        path: "/:routeName",
+        element: (
+          <ProtectedRoutes>
+            <RouteWithParams />
+          </ProtectedRoutes>
+        ),
+      },
       {path: "*", element: <NotFoundPage />}, // Optional: Handle 404 for unmatched routes
     ],
   },

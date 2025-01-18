@@ -2,11 +2,13 @@ import React, {useState} from "react";
 import {useForm} from "react-hook-form";
 import {Link, useLocation, useNavigate} from "react-router";
 import {Button, InputField} from "../../share-component";
+import {useAuth} from "../../contexts/authContext";
 
 const Verification = () => {
   const [isLoading, setIsLoading] = useState();
   const {state} = useLocation();
   const navigate = useNavigate();
+  const {login} = useAuth();
   const {
     register,
     handleSubmit,
@@ -15,11 +17,11 @@ const Verification = () => {
 
   const onSubmit = (data) => {
     setIsLoading(true);
-    console.log(data);
 
     setTimeout(() => {
       setIsLoading(false);
       if (data.verificationCode === "123456") {
+        login();
         navigate("/home");
       }
     }, 2000);

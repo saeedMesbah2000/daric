@@ -4,8 +4,15 @@ import {Button} from "../../share-component";
 import styles from "./Sidebar.module.css";
 import closeImage from "../../assets/closeColored.png";
 import accountImage from "../../assets/account.png";
+import {useAuth} from "../../contexts/authContext";
 
 const Sidebar = ({isOpen, toggleSidebar}) => {
+  const {logout} = useAuth();
+
+  const onLogoutClickHandler = () => {
+    logout();
+  };
+
   return (
     <div
       className={`${styles.sidebar}`}
@@ -83,7 +90,10 @@ const Sidebar = ({isOpen, toggleSidebar}) => {
 
       {/* Logout Button */}
       <div className="mt-auto">
-        <Link to="/login" className={styles.logoutButton}>
+        <Link
+          to="/login"
+          className={styles.logoutButton}
+          onClick={onLogoutClickHandler}>
           خروج
         </Link>
       </div>
