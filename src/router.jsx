@@ -4,6 +4,7 @@ import {createBrowserRouter} from "react-router";
 import IdentityLayout from "./layouts/indentity-layout/IdentityLayout";
 import {Login, Register, Verification} from "./features";
 import MainLayout from "./layouts/main-layout/MainLayout";
+import ProtectedRoutes from "./ProtectedRoutes";
 import {
   AboutUs,
   Home,
@@ -13,7 +14,6 @@ import {
   Settings,
   Support,
 } from "./pages";
-import ProtectedRoutes from "./ProtectedRoutes";
 
 const routeMapping = {
   home: <Home />,
