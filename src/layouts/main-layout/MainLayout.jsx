@@ -46,7 +46,7 @@ const MainLayout = () => {
       {/* Main Content */}
       <div className="flex-1 flex flex-col relative z-10">
         {/* Navbar */}
-        <div className="bg-white shadow-md py-4 px-8 flex justify-between items-center">
+        <div className="bg-white shadow-lg py-4 px-6 flex justify-between items-center rounded-b-xl">
           {routeName === "home" ? (
             <img
               onClick={toggleSidebar}

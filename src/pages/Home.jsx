@@ -1,41 +1,17 @@
 import React from "react";
 import {Link} from "react-router";
 import BottomBar from "../features/bottombar/BottomBar";
-import walletImage from "../assets/wallet-filled-money-tool.png";
 import qrImage from "../assets/QR_Code_Example.svg.png";
+import walletImage from "../assets/wallet-filled-money-tool.png";
 import clockImage from "../assets/time.png";
 import plusImage from "../assets/plus.png";
 import thunderImage from "../assets/thunder.png";
+import {InfoItem, ActionLink} from "../share-component";
 
-// Reusable Component for Info Item
-const InfoItem = ({icon, text, alt}) => (
-  <div className="flex items-center gap-3">
-    <img
-      src={icon}
-      alt={alt}
-      className="w-6 h-6 transition-transform transform group-hover:translate-x-1"
-    />
-    <p className="text-gray-700 font-medium">{text}</p>
-  </div>
-);
-
-// Reusable Component for Action Links
-const ActionLink = ({to, icon, text, alt}) => (
-  <Link
-    to={to}
-    className="flex items-center gap-3 px-4 py-2 bg-gradient-to-r from-purple-500 to-yellow-500 text-white font-semibold rounded-lg shadow-md hover:scale-105 hover:from-purple-600 hover:to-yellow-600 transition-transform duration-300">
-    <p>{text}</p>
-    <div className="flex items-center justify-center bg-white rounded-full p-1 shadow-sm">
-      <img src={icon} alt={alt} className="w-5 h-5" />
-    </div>
-  </Link>
-);
-
-// Home Component
 const Home = () => {
   return (
     <div
-      className="relative flex flex-col items-center justify-start bg-gray-50 py-10"
+      className="relative flex flex-col items-center justify-start  py-10"
       style={{height: "calc(100vh - 60px)"}}>
       {/* QR Code */}
       <img
