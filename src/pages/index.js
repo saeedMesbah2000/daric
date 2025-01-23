@@ -5,5 +5,19 @@ import Profile from "./Profile";
 import Rules from "./Rules";
 import Settings from "./Settings";
 import Support from "./Support";
+import Services from "./Services";
+import Transactions from "./Transactions";
+import Wallet from "./Wallet";
 
-export {Home, AboutUs, NotFoundPage, Profile, Rules, Settings, Support};
+export {
+  Home,
+  AboutUs,
+  NotFoundPage,
+  Profile,
+  Rules,
+  Settings,
+  Support,
+  Services,
+  Wallet,
+  Transactions,
+};

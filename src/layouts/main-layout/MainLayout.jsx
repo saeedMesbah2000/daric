@@ -14,6 +14,9 @@ const name = {
   support: "پشتیبانی",
   rules: "قوانین و مقررات",
   aboutUs: "درباره ما",
+  transactions: "تراکنش ها",
+  services: "خدمات بیشتر",
+  wallet: "کیف پول",
 };
 
 const MainLayout = () => {

@@ -4,51 +4,76 @@ import servicesImage from "../../assets/dimensions.png";
 import qrCodeScanImage from "../../assets/qr-code-scan.png";
 import transactionImage from "../../assets/transaction.png";
 import walletImage from "../../assets/wallet-filled-money-tool.png";
+import {Link} from "react-router";
 
 const BottomBar = () => {
   return (
     <div className="w-full flex justify-center items-center fixed bottom-0 right-0 z-50">
-      <div className="w-full md:w-[500px]  bg-gradient-to-r from-yellow-400 via-orange-500 to-yellow-600 shadow-lg flex flex-row items-center justify-around py-4 rounded-t-lg">
+      <div className="w-full md:w-[500px] bg-gradient-to-r from-purple-500 via-yellow-400 to-purple-600 shadow-lg flex items-center justify-around py-2 rounded-t-xl">
         {/* Home */}
-        <div className="flex flex-col items-center justify-center cursor-pointer">
-          <img src={homeImage} alt="Home" className="w-[24px] h-[24px]" />
-          <p className="mt-1 text-sm font-semibold">خانه</p>
-        </div>
+        <Link
+          to="/"
+          className="flex flex-col items-center justify-center cursor-pointer group">
+          <img
+            src={homeImage}
+            alt="Home"
+            className="w-[24px] h-[24px] group-hover:scale-110 transition-transform duration-300"
+          />
+          <p className="mt-1 text-sm font-semibold text-white group-hover:text-yellow-300">
+            خانه
+          </p>
+        </Link>
 
         {/* Wallet */}
-        <div className="flex flex-col items-center justify-center cursor-pointer">
-          <img src={walletImage} alt="Wallet" className="w-[24px] h-[24px]" />
-          <p className="mt-1 text-sm font-semibold">کیف پول</p>
-        </div>
+        <Link
+          to="/wallet"
+          className="flex flex-col items-center justify-center cursor-pointer group">
+          <img
+            src={walletImage}
+            alt="Wallet"
+            className="w-[24px] h-[24px] group-hover:scale-110 transition-transform duration-300"
+          />
+          <p className="mt-1 text-sm font-semibold text-white group-hover:text-yellow-300">
+            کیف پول
+          </p>
+        </Link>
 
         {/* QR Code */}
-        <div className="flex flex-col items-center justify-center rounded-full bg-white h-[60px] w-[60px] shadow-md transform hover:scale-105 transition duration-300 cursor-pointer">
+        <div className="flex flex-col items-center justify-center bg-white h-[60px] w-[60px] shadow-lg rounded-full transform hover:scale-110 transition-transform duration-300 cursor-pointer">
           <img
             src={qrCodeScanImage}
             alt="Scan QR Code"
-            className="w-[40px] h-[40px]"
+            className="w-[36px] h-[36px]"
           />
         </div>
 
         {/* Transactions */}
-        <div className="flex flex-col items-center justify-center cursor-pointer">
+        <Link
+          to="/transactions"
+          className="flex flex-col items-center justify-center cursor-pointer group">
           <img
             src={transactionImage}
             alt="Transactions"
-            className="w-[24px] h-[24px]"
+            className="w-[24px] h-[24px] group-hover:scale-110 transition-transform duration-300"
           />
-          <p className="mt-1 text-sm font-semibold">تراکنش‌ها</p>
-        </div>
+          <p className="mt-1 text-sm font-semibold text-white group-hover:text-yellow-300">
+            تراکنش‌ها
+          </p>
+        </Link>
 
         {/* Services */}
-        <div className="flex flex-col items-center justify-center cursor-pointer">
+        <Link
+          to="/services"
+          className="flex flex-col items-center justify-center cursor-pointer group">
           <img
             src={servicesImage}
             alt="Services"
-            className="w-[24px] h-[24px]"
+            className="w-[24px] h-[24px] group-hover:scale-110 transition-transform duration-300"
           />
-          <p className="mt-1 text-sm font-semibold">خدمات</p>
-        </div>
+          <p className="mt-1 text-sm font-semibold text-white group-hover:text-yellow-300">
+            خدمات
+          </p>
+        </Link>
       </div>
     </div>
   );

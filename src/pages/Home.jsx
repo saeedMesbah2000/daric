@@ -1,37 +1,53 @@
 import React from "react";
+import {Link} from "react-router";
 import BottomBar from "../features/bottombar/BottomBar";
 import walletImage from "../assets/wallet-filled-money-tool.png";
 import qrImage from "../assets/QR_Code_Example.svg.png";
 import clockImage from "../assets/time.png";
+import plusImage from "../assets/plus.png";
+import thunderImage from "../assets/thunder.png";
 
 // Reusable Component for Info Item
 const InfoItem = ({icon, text, alt}) => (
-  <div className="flex flex-row gap-2 items-center">
+  <div className="flex items-center gap-3">
     <img
       src={icon}
       alt={alt}
-      className="w-[24px] h-[24px] transition-transform transform group-hover:translate-x-1"
+      className="w-6 h-6 transition-transform transform group-hover:translate-x-1"
     />
-    <p>{text}</p>
+    <p className="text-gray-700 font-medium">{text}</p>
   </div>
+);
+
+// Reusable Component for Action Links
+const ActionLink = ({to, icon, text, alt}) => (
+  <Link
+    to={to}
+    className="flex items-center gap-3 px-4 py-2 bg-gradient-to-r from-purple-500 to-yellow-500 text-white font-semibold rounded-lg shadow-md hover:scale-105 hover:from-purple-600 hover:to-yellow-600 transition-transform duration-300">
+    <p>{text}</p>
+    <div className="flex items-center justify-center bg-white rounded-full p-1 shadow-sm">
+      <img src={icon} alt={alt} className="w-5 h-5" />
+    </div>
+  </Link>
 );
 
 // Home Component
 const Home = () => {
   return (
     <div
-      className="relative flex flex-col items-center justify-start pt-32"
+      className="relative flex flex-col items-center justify-start bg-gray-50 py-10"
       style={{height: "calc(100vh - 60px)"}}>
-      {/* QR Image */}
+      {/* QR Code */}
       <img
         src={qrImage}
         alt="QR Code"
-        className="w-[230px] h-[230px] cursor-pointer"
+        className="w-56 h-56 cursor-pointer shadow-md rounded-lg"
       />
 
       {/* Wallet Info Card */}
-      <div className="mt-24 border-2 border-black rounded-md w-[400px] h-[100px] text-center px-8 py-2">
-        <div className="w-full flex justify-between items-center">
+      <div className="mt-16 bg-white border-2 border-gray-300 rounded-lg w-[450px] p-6 shadow-lg">
+        {/* Wallet Balance Info */}
+        <div className="flex justify-between items-center mb-4">
           <InfoItem
             icon={walletImage}
             text="موجودی کیف پول"
@@ -40,7 +56,28 @@ const Home = () => {
           <img
             src={clockImage}
             alt="Clock"
-            className="w-[24px] h-[24px] transition-transform transform group-hover:translate-x-1"
+            className="w-6 h-6 transition-transform transform group-hover:translate-x-1"
+          />
+        </div>
+
+        {/* Wallet Balance */}
+        <div className="flex justify-center items-center text-2xl font-semibold text-purple-600 mb-4">
+          {"۴۵۰۰۰"} <span className="text-gray-500 text-lg mx-1">تومان</span>
+        </div>
+
+        {/* Action Buttons */}
+        <div className="flex justify-between items-center">
+          <ActionLink
+            to="/wallet"
+            icon={plusImage}
+            text="شارژ حساب"
+            alt="Add Balance"
+          />
+          <ActionLink
+            to="/wallet"
+            icon={thunderImage}
+            text="شارژ سریع"
+            alt="Quick Charge"
           />
         </div>
       </div>

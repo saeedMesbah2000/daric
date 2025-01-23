@@ -11,8 +11,11 @@ import {
   NotFoundPage,
   Profile,
   Rules,
+  Services,
   Settings,
   Support,
+  Transactions,
+  Wallet,
 } from "./pages";
 
 const routeMapping = {
@@ -22,6 +25,9 @@ const routeMapping = {
   rules: <Rules />,
   settings: <Settings />,
   support: <Support />,
+  services: <Services />,
+  transactions: <Transactions />,
+  wallet: <Wallet />,
 };
 
 const RouteWithParams = () => {
