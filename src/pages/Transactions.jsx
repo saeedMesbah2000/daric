@@ -54,42 +54,41 @@ const Transactions = () => {
         <div className="w-full grid grid-cols-1 gap-8">
           <InputField
             id="transactionType"
+            label="نوع تراکنش"
+            type="select"
             register={register}
             errors={errors}
-            label="نوع تراکنش"
-            type="string"
-            validation={{
-              required: "نوع تراکنش الزامی است!",
-            }}
+            validation={{required: "نوع تراکنش الزامی است!"}}
+            options={[
+              {value: "income", label: "واریز"},
+              {value: "outcome", label: "برداشت"},
+            ]}
           />
 
           <div className="flex flex-row gap-4">
             <InputField
-              id="from"
+              id="fromDate"
+              label="از تاریخ"
+              type="date"
               register={register}
               errors={errors}
-              label="از تاریخ"
-              type="string"
-              validation={{
-                required: "تاریخ الزامی است!",
-              }}
+              validation={{required: "تاریخ الزامی است!"}}
             />
 
             <InputField
-              id="to"
+              id="toDate"
+              label="تا تاریخ"
+              type="date"
               register={register}
               errors={errors}
-              label="تا تاریخ"
-              type="string"
-              validation={{
-                required: "تاریخ الزامی است!",
-              }}
+              validation={{required: "تاریخ الزامی است!"}}
             />
           </div>
         </div>
 
         {/* Filter Button */}
         <Button
+          type="submit"
           text="اعمال فیلتر"
           className="mt-4 bg-purple-600 text-white hover:bg-purple-700 transition"
         />
