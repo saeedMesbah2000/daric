@@ -1,17 +1,31 @@
 import React from "react";
-import {Button, InfoItem} from "../share-component";
+import {Button, InfoItem, InputField} from "../share-component";
 import walletImage from "../assets/wallet-filled-money-tool.png";
 import clockImage from "../assets/time.png";
 import plusImage from "../assets/plus.png";
-import thunderImage from "../assets/thunder.png"; // Use SVG for modern look
-import leftImage from "../assets/left-arrow.png"; // Use SVG for modern look
-import {useState} from "react";
+import thunderImage from "../assets/thunder.png";
+import leftImage from "../assets/left-arrow.png";
+import {useForm} from "react-hook-form";
 
 const Wallet = () => {
-  const [amount, setAmount] = useState(0);
+  const {
+    register,
+    setValue,
+    handleSubmit,
+    watch,
+    formState: {errors},
+  } = useForm();
+
+  const onSubmit = (data) => {
+    console.log("Form Submitted:", data);
+    alert(`Amount to recharge: ${data.amount} تومان`);
+  };
+
+  const amount = watch("amount") || 0; // Track the amount field
 
   return (
-    <div
+    <form
+      onSubmit={handleSubmit(onSubmit)} // Form submit handler
       className="flex flex-col items-center justify-start py-4 gap-6"
       style={{height: "calc(100vh - 60px)"}}>
       {/* Wallet Balance Info */}
@@ -33,6 +47,7 @@ const Wallet = () => {
         </div>
       </div>
 
+      {/* Auto-Recharge Activation */}
       <div className="flex justify-between items-center border-2 w-[400px] shadow-lg px-4 py-2 rounded-lg cursor-pointer hover:bg-gray-100 transition duration-300">
         <img
           src={thunderImage}
@@ -50,32 +65,55 @@ const Wallet = () => {
 
       <div className="w-[400px] h-1 bg-gray-300 rounded-lg" />
 
+      {/* Recharge Input */}
       <div className="w-[400px] flex flex-col items-center gap-4">
-        <p className="text-lg font-semibold">مبلغ مورد نظر:</p>
-
-        <div className="mb-2 text-2xl">
-          <span className="text-lg">{amount}</span>{" "}
+        <div className="my-2 text-2xl flex justify-between items-center gap-4">
+          <div className="w-[200px]">
+            <InputField
+              id="amount"
+              register={register}
+              errors={errors}
+              label="مبلغ مورد نظر:"
+              type="number"
+              defaultValue={amount}
+              validation={{
+                required: "مبلغ الزامی است!",
+                min: {value: 1000, message: "حداقل مبلغ ۱۰۰۰ تومان است!"},
+                max: {
+                  value: 1000000,
+                  message: "حداکثر مبلغ ۱,۰۰۰,۰۰۰ تومان است!",
+                },
+              }}
+            />
+          </div>
           <span className="text-gray-500 text-lg mx-1">تومان</span>
         </div>
 
         <div className="w-full flex flex-row items-center justify-between">
-          {["۵۰,۰۰۰", "۷۰,۰۰۰", "۱۰۰,۰۰۰"].map((value) => (
+          {[
+            {label: "۵۰,۰۰۰", value: 50000},
+            {label: "۷۰,۰۰۰", value: 70000},
+            {label: "۱۰۰,۰۰۰", value: 100000},
+          ].map((item) => (
             <div
-              key={value}
+              key={item.label}
               className="border-2 border-purple-600 hover:bg-purple-100 py-2 px-4 rounded-lg text-lg cursor-pointer transition duration-300"
-              onClick={() => setAmount(value)}
+              onClick={() => setValue("amount", item.value)}
               role="button"
-              tabIndex={0} // Accessibility: make it focusable
-              onKeyDown={(e) => e.key === "Enter" && setAmount(value)} // Accessibility: handle keyboard interaction
-              aria-label={`Set amount to ${value} تومان`}>
-              {value}
+              tabIndex={0}
+              onKeyDown={(e) =>
+                e.key === "Enter" && setValue("amount", item.value)
+              }
+              aria-label={`Set amount to ${item.label} تومان`}>
+              {item.label}
             </div>
           ))}
         </div>
 
-        <Button text={"افزایش موجودی"} className="mt-4" />
+        {/* Submit Button */}
+        <Button text={"افزایش موجودی"} type="submit" className="mt-4" />
       </div>
-    </div>
+    </form>
   );
 };
 
