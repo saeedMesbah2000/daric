@@ -2,7 +2,6 @@ import React, {useEffect, useState, useRef} from "react";
 import {QRCodeCanvas} from "qrcode.react";
 import BottomBar from "../features/bottombar/BottomBar";
 import logo from "../assets/coin.png";
-import downloadImage from "../assets/download.png";
 import walletImage from "../assets/wallet-filled-money-tool.png";
 import clockImage from "../assets/time.png";
 import plusImage from "../assets/plus.png";
@@ -14,7 +13,7 @@ const Home = () => {
   const [userId, setUserId] = useState(null);
   const qrRef = useRef(null);
 
-  // Simulate API call to fetch user ID
+  // API call to fetch user ID
   useEffect(() => {
     const fetchUserId = async () => {
       const response = await new Promise((resolve) =>
@@ -40,7 +39,7 @@ const Home = () => {
   return (
     <div className="flex flex-col items-center justify-start py-10 min-h-[calc(100vh-60px)]">
       {/* Animated QR Code Container */}
-      <div className="relative w-[233px] h-[232px] flex items-center justify-center rounded-xl p-4 overflow-hidden">
+      <div className="relative w-[234px] h-[234px] flex items-center justify-center rounded-lg p-4 overflow-hidden">
         {/* Background Layers */}
         <div className={styles.backgroundLayers}>
           <div className={styles.animateGradientLayer1}></div>
@@ -48,7 +47,7 @@ const Home = () => {
         </div>
 
         {/* QR Code */}
-        <div ref={qrRef} className="relative bg-white p-2 rounded-xl">
+        <div ref={qrRef} className="relative bg-white p-2 rounded-lg">
           {userId ? (
             <QRCodeCanvas
               value={userId}
@@ -77,12 +76,12 @@ const Home = () => {
       {/* Download Button */}
       <button
         onClick={downloadQRCode}
-        className="mt-2 bg-purple-600 text-white px-6 py-2 rounded-lg shadow-md hover:bg-purple-700 transition-all">
+        className="mt-2 bg-purple-600 text-white px-6 py-2 rounded-xl shadow-md hover:bg-purple-700 transition-all">
         دانلود رمزینه پاسخ سریع
       </button>
 
       {/* Wallet Info Card */}
-      <div className="mt-6 bg-white border-2 border-gray-300 rounded-lg w-full sm:w-[450px] p-6 shadow-lg">
+      <div className="mt-6 bg-white border-2 border-gray-300 rounded-xl w-full sm:w-[450px] p-6 shadow-lg">
         <div className="flex justify-between items-center mb-4">
           <InfoItem
             icon={walletImage}
