@@ -21,7 +21,7 @@ const Home = () => {
       />
 
       {/* Wallet Info Card */}
-      <div className="mt-16 bg-white border-2 border-gray-300 rounded-lg w-[450px] p-6 shadow-lg">
+      <div className="mt-16 bg-white border-2 border-gray-300 rounded-lg w-full sm:w-[450px] p-6 shadow-lg">
         {/* Wallet Balance Info */}
         <div className="flex justify-between items-center mb-4">
           <InfoItem

@@ -26,7 +26,7 @@ const Login = () => {
   };
 
   return (
-    <div className="w-full md:w-[370px] mx-auto px-6 py-8 bg-white/40 backdrop-blur-lg rounded-3xl shadow-xl border border-white/30">
+    <div className="w-[300px] sm:w-[370px] px-6 py-8 bg-white/40 backdrop-blur-lg rounded-3xl shadow-xl border border-white/30">
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="h-[350px] flex flex-col gap-6 justify-between">

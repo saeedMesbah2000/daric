@@ -26,10 +26,10 @@ const Wallet = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)} // Form submit handler
-      className="flex flex-col items-center justify-start py-4 gap-6"
+      className="flex flex-col items-center justify-start p-4 gap-6"
       style={{height: "calc(100vh - 60px)"}}>
       {/* Wallet Balance Info */}
-      <div className="mt-6 flex flex-col justify-between bg-gradient-to-b from-yellow-400 to-purple-600 border-2 border-gray-200 rounded-lg w-[400px] h-[250px] pt-6 shadow-lg transition-transform transform hover:scale-105">
+      <div className="w-full sm:w-[400px] mt-6 flex flex-col justify-between bg-gradient-to-b from-yellow-400 to-purple-600 border-2 border-gray-200 rounded-lg h-[250px] pt-6 shadow-lg transition-transform transform hover:scale-105">
         <div className="flex justify-between items-center mb-4 px-6 text-lg">
           <InfoItem icon={walletImage} text="کیف پول" alt="Wallet Balance" />
           <img
@@ -48,7 +48,7 @@ const Wallet = () => {
       </div>
 
       {/* Auto-Recharge Activation */}
-      <div className="flex justify-between items-center border-2 w-[400px] shadow-lg px-4 py-2 rounded-lg cursor-pointer hover:bg-gray-100 transition duration-300">
+      <div className="w-full sm:w-[400px] flex justify-between items-center border-2 shadow-lg px-4 py-2 rounded-lg cursor-pointer hover:bg-gray-100 transition duration-300">
         <img
           src={thunderImage}
           alt="Automatic Charge Activation"
@@ -63,10 +63,10 @@ const Wallet = () => {
         <img src={leftImage} alt="Left Arrow" className="h-6 w-6" />
       </div>
 
-      <div className="w-[400px] h-1 bg-gray-300 rounded-lg" />
+      <div className="w-full sm:w-[400px] h-1 bg-gray-300 rounded-lg" />
 
       {/* Recharge Input */}
-      <div className="w-[400px] flex flex-col items-center gap-4">
+      <div className="w-full sm:w-[400px] flex flex-col items-center gap-4">
         <div className="my-2 text-2xl flex justify-between items-center gap-4">
           <div className="w-[200px]">
             <InputField

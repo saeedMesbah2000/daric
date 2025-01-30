@@ -25,7 +25,7 @@ const Register = () => {
   console.log(formState.errors);
 
   return (
-    <div className="w-full md:w-[370px] px-4 py-8 flex flex-col justify-between sm:p-10 max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl bg-white/40 backdrop-blur-lg rounded-3xl shadow-xl border border-white/30 overflow-hidden mx-auto">
+    <div className="w-[300px] sm:w-[370px] px-4 py-8 flex flex-col justify-between sm:p-10 max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl bg-white/40 backdrop-blur-lg rounded-3xl shadow-xl border border-white/30 overflow-hidden mx-auto">
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="min-h-[350px] flex flex-col items-center gap-8 justify-between">

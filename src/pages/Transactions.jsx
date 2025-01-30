@@ -65,7 +65,7 @@ const Transactions = () => {
             ]}
           />
 
-          <div className="flex flex-row gap-4">
+          <div className="flex flex-col sm:flex-row gap-8 sm:gap-4">
             <InputField
               id="fromDate"
               label="از تاریخ"

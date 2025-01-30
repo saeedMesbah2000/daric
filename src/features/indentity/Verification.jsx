@@ -30,7 +30,7 @@ const Verification = () => {
   console.log(state);
 
   return (
-    <div className="w-full md:w-[370px] px-4 py-8 sm:p-10 max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl  bg-white/40 backdrop-blur-lg rounded-3xl shadow-xl border border-white/30 overflow-hidden mx-auto">
+    <div className="w-[300px] sm:w-[370px] px-4 py-8 sm:p-10 max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl  bg-white/40 backdrop-blur-lg rounded-3xl shadow-xl border border-white/30 overflow-hidden mx-auto">
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="h-[350px] flex flex-col gap-6 justify-between">
