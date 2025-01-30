@@ -33,7 +33,7 @@ const jalalimonths = [
 const useCalendar = () => {
   // Convert Jalali (Persian) date to Gregorian date
   function gregorianToJalali(gregorianYear, gregorianMonth, gregorianDay) {
-    const jalaliYear = gregorianYear - 621;
+    let jalaliYear = gregorianYear - 621;
 
     // Determine if the Jalali and Gregorian years are leap years
     const isJalaliLeapYear = isJalaliLeap(jalaliYear);
