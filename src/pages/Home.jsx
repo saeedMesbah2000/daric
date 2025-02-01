@@ -8,10 +8,12 @@ import plusImage from "../assets/plus.png";
 import thunderImage from "../assets/thunder.png";
 import {InfoItem, ActionLink, Button} from "../share-component";
 import styles from "../features/sidebar/Sidebar.module.css";
+import {useUserInfo} from "../contexts/userInfoContext";
 
 const Home = () => {
   const [userId, setUserId] = useState(null);
   const qrRef = useRef(null);
+  const {userInfo} = useUserInfo();
 
   // API call to fetch user ID
   useEffect(() => {
@@ -77,7 +79,7 @@ const Home = () => {
       <button
         onClick={downloadQRCode}
         className="mt-2 bg-purple-600 text-white px-6 py-2 rounded-xl shadow-md hover:bg-purple-700 transition-all">
-        دانلود رمزینه پاسخ سریع
+        دریافت رمزینه پاسخ سریع
       </button>
 
       {/* Wallet Info Card */}
@@ -96,7 +98,8 @@ const Home = () => {
         </div>
 
         <div className="flex justify-center items-center text-2xl font-semibold text-purple-600 mb-4">
-          {"۴۵۰۰۰"} <span className="text-gray-500 text-lg mx-1">تومان</span>
+          {userInfo?.walletValue}{" "}
+          <span className="text-gray-500 text-lg mx-1">تومان</span>
         </div>
 
         <div className="flex justify-between items-center">

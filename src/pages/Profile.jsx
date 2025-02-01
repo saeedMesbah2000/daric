@@ -2,6 +2,7 @@ import React from "react";
 import {useForm} from "react-hook-form";
 import accountImage from "../assets/account.png";
 import {Button, InputField} from "../share-component";
+import {useUserInfo} from "../contexts/userInfoContext";
 
 const Profile = () => {
   const {
@@ -9,6 +10,8 @@ const Profile = () => {
     handleSubmit,
     formState: {errors},
   } = useForm();
+
+  const {userInfo} = useUserInfo();
 
   const onSubmitHandler = (event) => {
     console.log(event);
@@ -36,25 +39,37 @@ const Profile = () => {
       <div className="w-full max-w-md bg-white shadow-lg rounded-lg px-6 pt-10 pb-6 mt-4 flex flex-col gap-8">
         {/* User Name */}
         <InputField
-          id="userName"
-          label="نام و نام‌خانوادگی"
+          id="firstName"
+          label="نام"
           type="text"
           register={register}
           errors={errors}
-          value={"سعید مصباح"}
+          value={userInfo?.firstName}
           validation={{
-            required: "نام و نام‌خانوادگی الزامی است!",
+            required: "نام الزامی است!",
+          }}
+        />
+
+        <InputField
+          id="lastName"
+          label="نام‌خانوادگی"
+          type="text"
+          register={register}
+          errors={errors}
+          value={userInfo?.lastName}
+          validation={{
+            required: "نام‌خانوادگی الزامی است!",
           }}
         />
 
         {/* National ID */}
         <InputField
-          id="userId"
+          id="socialSecureNumber"
           label="کد ملی"
           type="number"
           register={register}
           errors={errors}
-          value={"0024235164"}
+          value={userInfo?.socialSecureNumber}
           validation={{
             required: "کد ملی الزامی است!",
             minLength: {value: 10, message: "کد ملی باید ۱۰ رقم باشد!"},
@@ -69,26 +84,11 @@ const Profile = () => {
           type="number"
           register={register}
           errors={errors}
-          value={"09129630973"}
+          value={userInfo?.phoneNumber}
           validation={{
             required: "شماره موبایل الزامی است",
             minLength: {value: 11, message: "شماره موبایل باید ۱۱ رقم باشد!"},
             maxLength: {value: 11, message: "شماره موبایل باید ۱۱ رقم باشد!"},
-          }}
-        />
-
-        {/* Email */}
-        <InputField
-          id="email"
-          label="ایمیل"
-          type="email"
-          register={register}
-          errors={errors}
-          validation={{
-            pattern: {
-              value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-              message: "فرمت ایمیل صحیح نیست!",
-            },
           }}
         />
       </div>

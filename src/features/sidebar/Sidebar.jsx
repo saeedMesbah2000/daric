@@ -5,9 +5,11 @@ import styles from "./Sidebar.module.css";
 import closeImage from "../../assets/closeColored.png";
 import accountImage from "../../assets/account.png";
 import {useAuth} from "../../contexts/authContext";
+import {useUserInfo} from "../../contexts/userInfoContext";
 
 const Sidebar = ({isOpen, toggleSidebar}) => {
   const {logout} = useAuth();
+  const {userInfo} = useUserInfo();
 
   const onLogoutClickHandler = () => {
     logout();
@@ -41,10 +43,13 @@ const Sidebar = ({isOpen, toggleSidebar}) => {
 
       <nav className="flex flex-col gap-4 w-full px-6">
         <div className={`${styles.navItem}`}>
+          {/* Profile Info */}
           <div className="flex flex-row items-center justify-between border-b-2 pb-2">
             <div className="flex flex-col items-center gap-2 text-black">
-              <p className="text-lg">سعید مصباح</p>
-              <p>۰۹۱۲۹۶۳۰۹۷۳</p>
+              <p className="text-lg">
+                {userInfo?.firstName} {userInfo?.lastName}
+              </p>
+              <p>{userInfo?.phoneNumber}</p>
             </div>
 
             <div className="flex items-center justify-center">
@@ -57,11 +62,12 @@ const Sidebar = ({isOpen, toggleSidebar}) => {
             </div>
           </div>
 
+          {/*  */}
           <div className="mt-2">
             <p className="text-start text-black">سطح احراز</p>
             <div className="w-full flex flex-row items-center gap-1 mt-2">
               <div className="w-full h-[15px] border-black border-2 bg-yellow-500"></div>
-              <div className="w-full h-[15px] border-black border-2 bg-yellow-500"></div>
+              <div className="w-full h-[15px] border-black border-2 bg-white"></div>
               <div className="w-full h-[15px] border-black border-2 bg-white"></div>
             </div>
           </div>
