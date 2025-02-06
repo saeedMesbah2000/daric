@@ -8,6 +8,7 @@ import Support from "./Support";
 import Services from "./Services";
 import Transactions from "./Transactions";
 import Wallet from "./Wallet";
+import QrCodeScanner from "./QrCodeScanner";
 
 export {
   Home,
@@ -20,4 +21,5 @@ export {
   Services,
   Wallet,
   Transactions,
+  QrCodeScanner,
 };

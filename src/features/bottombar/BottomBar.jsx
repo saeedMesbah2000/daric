@@ -39,13 +39,15 @@ const BottomBar = () => {
         </Link>
 
         {/* QR Code */}
-        <div className="flex flex-col items-center justify-center bg-white h-[60px] w-[60px] shadow-lg rounded-full transform hover:scale-110 transition-transform duration-300 cursor-pointer">
+        <Link
+          to="/scanner"
+          className="flex flex-col items-center justify-center bg-white h-[60px] w-[60px] shadow-lg rounded-full transform hover:scale-110 transition-transform duration-300 cursor-pointer">
           <img
             src={qrCodeScanImage}
             alt="Scan QR Code"
             className="w-[36px] h-[36px]"
           />
-        </div>
+        </Link>
 
         {/* Transactions */}
         <Link

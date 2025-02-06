@@ -10,6 +10,7 @@ import {
   Home,
   NotFoundPage,
   Profile,
+  QrCodeScanner,
   Rules,
   Services,
   Settings,
@@ -28,6 +29,7 @@ const routeMapping = {
   services: <Services />,
   transactions: <Transactions />,
   wallet: <Wallet />,
+  scanner: <QrCodeScanner />,
 };
 
 const RouteWithParams = () => {
