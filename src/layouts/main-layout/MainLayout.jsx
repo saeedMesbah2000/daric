@@ -17,13 +17,13 @@ const name = {
   transactions: "تراکنش ها",
   services: "خدمات بیشتر",
   wallet: "کیف پول",
+  scanner: "اسکن رمزینه پاسخ سریع",
+  doTransaction: "انجام تراکنش",
 };
 
 const MainLayout = () => {
   const [open, setOpen] = useState(true);
   const {routeName} = useParams();
-
-  console.log(routeName);
 
   const toggleSidebar = () => {
     setOpen((prevState) => !prevState);

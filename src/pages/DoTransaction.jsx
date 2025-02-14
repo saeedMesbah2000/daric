@@ -1,16 +1,99 @@
-import React from "react";
-import {useLocation} from "react-router";
+import React, {useEffect} from "react";
+import {useLocation, useNavigate} from "react-router";
+import {Button, InputField} from "../share-component";
+import {useForm} from "react-hook-form";
+import {useUserInfo} from "../contexts/userInfoContext";
 
 const DoTransaction = () => {
   const location = useLocation();
   const qrData = location.state?.qrData || "No Data"; // Retrieve passed data
+  const {userInfo, setUserInfo} = useUserInfo();
+  const navigate = useNavigate();
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: {errors},
+  } = useForm();
+
+  const onSubmit = (data) => {
+    setUserInfo((preState) => {
+      return {
+        ...preState,
+        walletValue: Number(preState?.walletValue) - Number(data.amount),
+      };
+    });
+    navigate("/home");
+  };
+
+  const amount = watch("amount") || 0; // Track the amount field
+
+  useEffect(() => {}, []);
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
-      <h1 className="text-3xl font-bold mb-4">انجام تراکنش</h1>
-      <p className="text-lg text-gray-600">داده اسکن شده:</p>
-      <div className="bg-gray-100 p-4 rounded-lg mt-2 text-lg font-semibold text-purple-700">
-        {qrData}
+    <div className="flex flex-col items-center justify-center min-h-[calc(100vh-67px)] p-6">
+      <div className="bg-white shadow-lg rounded-2xl p-8 w-full max-w-lg">
+        {/* Header */}
+        <h1 className="text-2xl font-semibold text-center text-purple-700 mb-4">
+          تایید پرداخت نهایی
+        </h1>
+
+        {/* Wallet Balance Display */}
+        <div className="bg-purple-100 text-purple-800 text-center py-3 px-6 rounded-lg mb-6">
+          موجودی کیف پول شما:{" "}
+          <span className="font-bold">{userInfo.walletValue} تومان</span>
+        </div>
+
+        {/* Payment Form */}
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+          {/* Amount Input */}
+          <div className="flex flex-col mt-16">
+            {/* <label className="text-gray-600 font-medium mb-8">
+              مبلغ پرداخت:
+            </label> */}
+
+            <InputField
+              id="amount"
+              register={register}
+              errors={errors}
+              label="مبلغ مورد نظر را وارد کنید:"
+              type="number"
+              defaultValue={amount}
+              className="w-full"
+              validation={{
+                required: "مبلغ الزامی است!",
+                min: {value: 0, message: "حداقل مبلغ ۰ تومان است!"},
+                max: {
+                  value: userInfo.walletValue,
+                  message: `حداکثر مبلغ ${userInfo.walletValue} تومان است!`,
+                },
+              }}
+            />
+          </div>
+
+          {/* Receiver Display */}
+          <div className="flex flex-col">
+            <label className="text-gray-600 font-medium mb-2">گیرنده:</label>
+
+            <InputField
+              id="recipient"
+              register={register}
+              errors={errors}
+              label="علی نوروز بیگی"
+              type="text"
+              disabled={true}
+              className="w-full bg-gray-200"
+            />
+          </div>
+
+          {/* Submit Button */}
+          <Button
+            text="پرداخت"
+            type="submit"
+            className="w-full bg-gradient-to-r from-purple-500 to-purple-700 hover:shadow-lg transition-all text-white py-3 rounded-lg"
+          />
+        </form>
       </div>
     </div>
   );

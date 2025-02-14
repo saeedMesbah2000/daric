@@ -5,7 +5,7 @@ import clockImage from "../assets/time.png";
 import plusImage from "../assets/plus.png";
 import thunderImage from "../assets/thunder.png";
 import leftImage from "../assets/left-arrow.png";
-import {set, useForm} from "react-hook-form";
+import {useForm} from "react-hook-form";
 import {useUserInfo} from "../contexts/userInfoContext";
 import {useNavigate} from "react-router";
 

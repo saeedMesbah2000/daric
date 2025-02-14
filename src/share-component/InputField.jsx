@@ -24,6 +24,7 @@ const InputField = ({
   validation,
   value = null,
   options = [],
+  disabled = false,
 }) => {
   // State to track focus and whether the field has a value
   const [isFocused, setIsFocused] = useState(
@@ -77,6 +78,7 @@ const InputField = ({
         <input
           id={id}
           type={type}
+          disabled={disabled}
           onFocus={handleFocus}
           onBlur={handleBlur}
           {...register(id, {...validation, value: value})} // Register input with default value
