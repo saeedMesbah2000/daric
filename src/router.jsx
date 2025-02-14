@@ -7,6 +7,7 @@ import MainLayout from "./layouts/main-layout/MainLayout";
 import ProtectedRoutes from "./ProtectedRoutes";
 import {
   AboutUs,
+  DoTransaction,
   Home,
   NotFoundPage,
   Profile,
@@ -30,6 +31,7 @@ const routeMapping = {
   transactions: <Transactions />,
   wallet: <Wallet />,
   scanner: <QrCodeScanner />,
+  doTransaction: <DoTransaction />,
 };
 
 const RouteWithParams = () => {

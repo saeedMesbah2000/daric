@@ -9,6 +9,7 @@ import Services from "./Services";
 import Transactions from "./Transactions";
 import Wallet from "./Wallet";
 import QrCodeScanner from "./QrCodeScanner";
+import DoTransaction from "./DoTransaction";
 
 export {
   Home,
@@ -22,4 +23,5 @@ export {
   Wallet,
   Transactions,
   QrCodeScanner,
+  DoTransaction,
 };

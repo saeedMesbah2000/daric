@@ -1,16 +1,19 @@
 import React, {useState} from "react";
 import QrScanner from "react-qr-scanner";
+import {useNavigate} from "react-router";
+import styles from "../features/sidebar/Sidebar.module.css";
 
 const QrCodeScanner = () => {
   const [scanResult, setScanResult] = useState(null);
-  const [isScanning, setIsScanning] = useState(false); // Track scanning status
+  const [isScanning, setIsScanning] = useState(false);
+  const navigate = useNavigate();
 
   const handleScan = (data) => {
     if (data) {
       setScanResult(data.text);
-      setIsScanning(false); // Stop scanning after successful scan
-      alert(`Scanned QR Code: ${data.text}`);
-      console.log(data.text);
+      setIsScanning(false);
+
+      navigate("/doTransaction", {state: {qrData: data.text}});
     }
   };
 
@@ -28,22 +31,27 @@ const QrCodeScanner = () => {
     <div className="flex flex-col items-center justify-center h-screen">
       <h1 className="text-2xl font-bold mb-4">اسکنر QR کد</h1>
 
-      <div className="w-full max-w-xs border-2 border-purple-500 rounded-lg overflow-hidden shadow-lg">
-        <QrScanner
-          delay={300}
-          onError={handleError}
-          onScan={handleScan}
-          onLoad={startScanning} // Start scanning when component loads
-          style={{width: "100%"}}
-        />
+      <div className="relative w-full m-1 sm:m-0 sm:w-[400px] p-1 flex items-center justify-center rounded-lg overflow-hidden">
+        {/* Background Layers */}
+        <div className={styles.backgroundLayers}>
+          <div className={styles.animateGradientLayer1}></div>
+          <div className={styles.animateGradientLayer2}></div>
+        </div>
+
+        {/* QR Code */}
+        <div className="relative bg-white p-2 rounded-lg sm:m-0 sm:w-[400px]">
+          <QrScanner
+            delay={300}
+            onError={handleError}
+            onScan={handleScan}
+            onLoad={startScanning}
+            style={{width: "100%"}}
+          />
+        </div>
       </div>
 
       {isScanning && (
         <p className="mt-4 text-blue-600 font-medium">در حال اسکن...</p>
-      )}
-
-      {scanResult && (
-        <p className="mt-4 text-green-600 font-medium">نتیجه: {scanResult}</p>
       )}
 
       <button
