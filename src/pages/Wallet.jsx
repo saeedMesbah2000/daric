@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {Button, InfoItem, InputField} from "../share-component";
 import walletImage from "../assets/wallet-filled-money-tool.png";
 import clockImage from "../assets/time.png";
@@ -8,10 +8,13 @@ import leftImage from "../assets/left-arrow.png";
 import {useForm} from "react-hook-form";
 import {useUserInfo} from "../contexts/userInfoContext";
 import {useNavigate} from "react-router";
+import {useToast} from "../contexts/toastContext";
 
 const Wallet = () => {
+  const [isLoading, setIsLoading] = useState();
   const {userInfo, setUserInfo} = useUserInfo();
   const navigate = useNavigate();
+  const {showToast} = useToast();
   const {
     register,
     setValue,
@@ -21,14 +24,19 @@ const Wallet = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data.amount);
-    setUserInfo((preState) => {
-      return {
-        ...preState,
-        walletValue: Number(preState?.walletValue) + Number(data.amount),
-      };
-    });
-    navigate("/home");
+    setIsLoading(true);
+
+    setTimeout(() => {
+      setIsLoading(false);
+      setUserInfo((preState) => {
+        return {
+          ...preState,
+          walletValue: Number(preState?.walletValue) + Number(data.amount),
+        };
+      });
+      showToast("افزایش موجودی با موفقیت انجام شد!", "success");
+      navigate("/home");
+    }, 2000);
   };
 
   const amount = watch("amount") || 0; // Track the amount field
@@ -122,7 +130,12 @@ const Wallet = () => {
         </div>
 
         {/* Submit Button */}
-        <Button text={"افزایش موجودی"} type="submit" className="mt-4" />
+        <Button
+          text={"افزایش موجودی"}
+          type="submit"
+          className="mt-4"
+          loading={isLoading}
+        />
       </div>
     </form>
   );

@@ -12,7 +12,7 @@ const ToastNotification = () => {
 
       setTimeout(() => {
         setFadeOut(true);
-      }, 2500); // Start fade-out before hiding
+      }, 1500); // Start fade-out before hiding
     }
   }, [toast.isOpen]);
 

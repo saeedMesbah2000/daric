@@ -6,12 +6,15 @@ import closeImage from "../../assets/closeColored.png";
 import accountImage from "../../assets/account.png";
 import {useAuth} from "../../contexts/authContext";
 import {useUserInfo} from "../../contexts/userInfoContext";
+import {useToast} from "../../contexts/toastContext";
 
 const Sidebar = ({isOpen, toggleSidebar}) => {
   const {logout} = useAuth();
   const {userInfo} = useUserInfo();
+  const {showToast} = useToast();
 
   const onLogoutClickHandler = () => {
+    showToast("خروج با موفقیت انجام شد!", "success");
     logout();
   };
 

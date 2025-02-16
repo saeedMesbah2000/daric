@@ -3,12 +3,15 @@ import {useLocation, useNavigate} from "react-router";
 import {Button, InputField} from "../share-component";
 import {useForm} from "react-hook-form";
 import {useUserInfo} from "../contexts/userInfoContext";
+import {useToast} from "../contexts/toastContext";
 
 const DoTransaction = () => {
   const location = useLocation();
   const qrData = location.state?.qrData || "No Data"; // Retrieve passed data
   const {userInfo, setUserInfo} = useUserInfo();
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState();
+  const {showToast} = useToast();
 
   const {
     register,
@@ -18,13 +21,19 @@ const DoTransaction = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    setUserInfo((preState) => {
-      return {
-        ...preState,
-        walletValue: Number(preState?.walletValue) - Number(data.amount),
-      };
-    });
-    navigate("/home");
+    setIsLoading(true);
+
+    setTimeout(() => {
+      setIsLoading(false);
+      setUserInfo((preState) => {
+        return {
+          ...preState,
+          walletValue: Number(preState?.walletValue) - Number(data.amount),
+        };
+      });
+      showToast("افزایش موجودی با موفقیت انجام شد!", "success");
+      navigate("/home");
+    }, 2000);
   };
 
   const amount = watch("amount") || 0; // Track the amount field
@@ -89,6 +98,7 @@ const DoTransaction = () => {
 
           {/* Submit Button */}
           <Button
+            loading={isLoading}
             text="پرداخت"
             type="submit"
             className="w-full bg-gradient-to-r from-purple-500 to-purple-700 hover:shadow-lg transition-all text-white py-3 rounded-lg"
