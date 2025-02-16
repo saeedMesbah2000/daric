@@ -1,0 +1,65 @@
+/* ToastNotification.module.css */
+.toastContainer {
+  position: fixed;
+  top: 20px;
+  right: 15px;
+  transform: translateX(-50%);
+  padding: 12px 24px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  z-index: 100;
+  min-width: 250px;
+  font-size: 16px;
+  font-weight: 500;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Different Toast Types */
+.success {
+  background-color: #38a169;
+  color: white;
+}
+
+.error {
+  background-color: #e53e3e;
+  color: white;
+}
+
+.info {
+  background-color: #3182ce;
+  color: white;
+}
+
+/* Animation for Appearance */
+@keyframes fadeInSlideUp {
+  from {
+    opacity: 0;
+    transform: translate(20px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes fadeOutSlideDown {
+  from {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+  to {
+    opacity: 0;
+    transform: translate(20px, 0);
+  }
+}
+
+/* Apply Animations */
+.toastAppear {
+  animation: fadeInSlideUp 0.5s ease-out forwards;
+}
+
+.toastDisappear {
+  animation: fadeOutSlideDown 0.5s ease-in forwards;
+}

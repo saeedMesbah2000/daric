@@ -1,14 +1,16 @@
 import React, {useState} from "react";
 import {useForm} from "react-hook-form";
-import {Link, useLocation, useNavigate} from "react-router";
+import {useLocation, useNavigate} from "react-router";
 import {Button, InputField} from "../../share-component";
 import {useAuth} from "../../contexts/authContext";
+import {useToast} from "../../contexts/toastContext";
 
 const Verification = () => {
   const [isLoading, setIsLoading] = useState();
   const {state} = useLocation();
   const navigate = useNavigate();
   const {login} = useAuth();
+  const {showToast} = useToast();
   const {
     register,
     handleSubmit,
@@ -22,6 +24,7 @@ const Verification = () => {
       setIsLoading(false);
       if (data.verificationCode === "123456") {
         login();
+        showToast("ورود با موفقیت انجام شد!", "success");
         navigate("/home");
       }
     }, 2000);
