@@ -15,22 +15,6 @@ const Home = () => {
   const qrRef = useRef(null);
   const {userInfo} = useUserInfo();
 
-  // API call to fetch user ID
-  useEffect(() => {
-    const fetchUserId = async () => {
-      const response = await new Promise((resolve) =>
-        setTimeout(
-          () => resolve({userId: "550e8400-e29b-41d4-a716-446655440000"}),
-          1000
-        )
-      );
-      setUserId(response.userId);
-    };
-
-    fetchUserId();
-  }, []);
-
-  // Function to download QR Code as PNG
   const downloadQRCode = () => {
     const canvas = qrRef.current.querySelector("canvas");
     if (canvas) {
@@ -53,28 +37,24 @@ const Home = () => {
 
         {/* QR Code */}
         <div ref={qrRef} className="relative bg-white p-2 rounded-lg">
-          {userId ? (
-            <QRCodeCanvas
-              value={userId}
-              size={210}
-              bgColor="#ffffff"
-              fgColor="#6B21A8"
-              level={"H"}
-              includeMargin={false}
-              imageSettings={{
-                src: logo,
-                height: 40,
-                width: 40,
-                excavate: true,
-              }}
-              style={{
-                borderRadius: "15px",
-                padding: "8px",
-              }}
-            />
-          ) : (
-            <p className="text-gray-500 animate-pulse">در حال بارگذاری...</p>
-          )}
+          <QRCodeCanvas
+            value={userInfo.qr_code_id}
+            size={210}
+            bgColor="#ffffff"
+            fgColor="#6B21A8"
+            level={"H"}
+            includeMargin={false}
+            imageSettings={{
+              src: logo,
+              height: 40,
+              width: 40,
+              excavate: true,
+            }}
+            style={{
+              borderRadius: "15px",
+              padding: "8px",
+            }}
+          />
         </div>
       </div>
 
@@ -101,7 +81,7 @@ const Home = () => {
         </div>
 
         <div className="flex justify-center items-center text-2xl font-semibold text-purple-600 mb-4">
-          {userInfo?.walletValue}{" "}
+          {userInfo?.walletBalance}{" "}
           <span className="text-gray-500 text-lg mx-1">تومان</span>
         </div>
 

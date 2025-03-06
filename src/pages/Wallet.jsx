@@ -31,7 +31,7 @@ const Wallet = () => {
       setUserInfo((preState) => {
         return {
           ...preState,
-          walletValue: Number(preState?.walletValue) + Number(data.amount),
+          walletBalance: Number(preState?.walletBalance) + Number(data.amount),
         };
       });
       showToast("افزایش موجودی با موفقیت انجام شد!", "success");
@@ -39,11 +39,12 @@ const Wallet = () => {
     }, 2000);
   };
 
-  const amount = watch("amount") || 0; // Track the amount field
+  // Track the amount field
+  const amount = watch("amount") || 0;
 
   return (
     <form
-      onSubmit={handleSubmit(onSubmit)} // Form submit handler
+      onSubmit={handleSubmit(onSubmit)}
       className="flex flex-col items-center justify-start p-4 gap-6"
       style={{height: "calc(100vh - 60px)"}}>
       {/* Wallet Balance Info */}
@@ -60,7 +61,7 @@ const Wallet = () => {
         <div className="w-full bg-white border-2 flex flex-col justify-center items-center text-2xl font-semibold text-purple-700 rounded-b-lg shadow-md">
           <p className="w-full text-sm text-gray-600">موجودی:</p>
           <div className="mb-2 text-2xl font-bold text-purple-800">
-            {userInfo?.walletValue}{" "}
+            {userInfo?.walletBalance}{" "}
             <span className="text-gray-500 text-lg mx-1">تومان</span>
           </div>
         </div>

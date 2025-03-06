@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import QrScanner from "react-qr-scanner";
 import {useNavigate} from "react-router";
 import styles from "../features/sidebar/Sidebar.module.css";
+import {getUserIdByQrCode} from "../services/TransactionServices";
 
 const QrCodeScanner = () => {
   const [scanResult, setScanResult] = useState(null);
@@ -12,8 +13,9 @@ const QrCodeScanner = () => {
     if (data) {
       setScanResult(data.text);
       setIsScanning(false);
-
-      navigate("/doTransaction", {state: {qrData: data.text}});
+      getUserIdByQrCode(data.text).then((response) => {
+        navigate("/doTransaction", {state: {qrData: response}});
+      });
     }
   };
 

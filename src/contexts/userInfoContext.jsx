@@ -6,6 +6,7 @@ const UserInfoContext = createContext();
 
 export const UserInfoProvider = ({children}) => {
   const [userInfo, setUserInfo] = useState({
+    id: "",
     firstName: "",
     lastName: "",
     default_payment_amount: "",
