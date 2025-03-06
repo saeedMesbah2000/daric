@@ -1,11 +1,14 @@
 import React, {useState} from "react";
 import {useForm} from "react-hook-form";
 import {Link, useNavigate} from "react-router";
+import {RegisterUser} from "../../services/IdentityServices";
 import {Button, InputField} from "../../share-component";
+import {useUserInfo} from "../../contexts/userInfoContext";
 
 const Register = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const {setUserInfo} = useUserInfo();
   const {
     register,
     handleSubmit,
@@ -16,13 +19,13 @@ const Register = () => {
   const onSubmit = (data) => {
     setIsLoading(true);
 
-    setTimeout(() => {
+    RegisterUser(data).then((response) => {
+      debugger;
+      setUserInfo(response);
       setIsLoading(false);
-      navigate("/verification", {state: data.phoneNumber});
-    }, 2000);
+      navigate("/verification");
+    });
   };
-
-  console.log(formState.errors);
 
   return (
     <div className="w-[300px] sm:w-[370px] px-4 py-8 flex flex-col justify-between sm:p-10 max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl bg-white/40 backdrop-blur-lg rounded-3xl shadow-xl border border-white/30 overflow-hidden mx-auto">
@@ -36,18 +39,29 @@ const Register = () => {
         </h2>
 
         <InputField
-          id="userName"
-          label="نام و نام‌خانوادگی"
+          id="firstName"
+          label="نام"
           type="text"
           register={register}
           errors={errors}
           validation={{
-            required: "نام و نام‌خانوادگی الزامی است!",
+            required: "نام الزامی است!",
           }}
         />
 
         <InputField
-          id="userId"
+          id="lastName"
+          label="نام‌خانوادگی"
+          type="text"
+          register={register}
+          errors={errors}
+          validation={{
+            required: "نام‌خانوادگی الزامی است!",
+          }}
+        />
+
+        <InputField
+          id="socialSecureNumber"
           label="کد ملی"
           type="number"
           register={register}

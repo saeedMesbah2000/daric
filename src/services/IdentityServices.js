@@ -10,3 +10,16 @@ export const LoginUser = async (userPhoneNumber) => {
     return error;
   }
 };
+
+export const RegisterUser = async (params) => {
+  try {
+    debugger;
+    const response = await http.post("register/", params);
+
+    debugger;
+
+    return response.data;
+  } catch (error) {
+    return error.message;
+  }
+};
