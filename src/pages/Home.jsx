@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useRef} from "react";
+import React, {useRef} from "react";
 import {QRCodeCanvas} from "qrcode.react";
 import BottomBar from "../features/bottombar/BottomBar";
 import logo from "../assets/coin.png";
@@ -9,11 +9,13 @@ import thunderImage from "../assets/thunder.png";
 import {InfoItem, ActionLink, Button} from "../share-component";
 import styles from "../features/sidebar/Sidebar.module.css";
 import {useUserInfo} from "../contexts/userInfoContext";
+import {getWalletBalance} from "../services/TransactionServices";
+import {useToast} from "../contexts/toastContext";
 
 const Home = () => {
-  const [userId, setUserId] = useState(null);
   const qrRef = useRef(null);
-  const {userInfo} = useUserInfo();
+  const {userInfo, setUserInfo} = useUserInfo();
+  const {showToast} = useToast();
 
   const downloadQRCode = () => {
     const canvas = qrRef.current.querySelector("canvas");
@@ -23,6 +25,19 @@ const Home = () => {
       link.download = "my_qr_code.png";
       link.click();
     }
+  };
+
+  const getCurrentWalletBalanceHandler = () => {
+    getWalletBalance(userInfo.id).then((response) => {
+      setUserInfo((preState) => {
+        return {
+          ...preState,
+          walletBalance: Number(response.walletBalance),
+        };
+      });
+
+      showToast("کیف پول به روز رسانی شد!", "success");
+    });
   };
 
   return (
@@ -73,10 +88,12 @@ const Home = () => {
             text="موجودی کیف پول"
             alt="Wallet Balance"
           />
+
           <img
             src={clockImage}
             alt="Clock"
-            className="w-6 h-6 transition-transform transform group-hover:translate-x-1"
+            className="w-6 h-6 transition-transform transform group-hover:translate-x-1 cursor-pointer"
+            onClick={getCurrentWalletBalanceHandler}
           />
         </div>
 

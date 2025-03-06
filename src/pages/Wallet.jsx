@@ -2,13 +2,14 @@ import React, {useState} from "react";
 import {Button, InfoItem, InputField} from "../share-component";
 import walletImage from "../assets/wallet-filled-money-tool.png";
 import clockImage from "../assets/time.png";
-import plusImage from "../assets/plus.png";
+// import plusImage from "../assets/plus.png";
 import thunderImage from "../assets/thunder.png";
 import leftImage from "../assets/left-arrow.png";
 import {useForm} from "react-hook-form";
 import {useUserInfo} from "../contexts/userInfoContext";
 import {useNavigate} from "react-router";
 import {useToast} from "../contexts/toastContext";
+import {increaseWalletBalance} from "../services/TransactionServices";
 
 const Wallet = () => {
   const [isLoading, setIsLoading] = useState();
@@ -26,17 +27,21 @@ const Wallet = () => {
   const onSubmit = (data) => {
     setIsLoading(true);
 
-    setTimeout(() => {
-      setIsLoading(false);
-      setUserInfo((preState) => {
-        return {
-          ...preState,
-          walletBalance: Number(preState?.walletBalance) + Number(data.amount),
-        };
-      });
-      showToast("افزایش موجودی با موفقیت انجام شد!", "success");
-      navigate("/home");
-    }, 2000);
+    increaseWalletBalance({user_id: userInfo.id, amount: data.amount}).then(
+      (response) => {
+        debugger;
+        setUserInfo((preState) => {
+          return {
+            ...preState,
+            walletBalance: Number(response.walletBalance),
+          };
+        });
+
+        setIsLoading(false);
+        showToast("افزایش موجودی با موفقیت انجام شد!", "success");
+        navigate("/home");
+      }
+    );
   };
 
   // Track the amount field

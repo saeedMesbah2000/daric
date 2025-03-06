@@ -19,3 +19,23 @@ export const doTransaction = async (params) => {
     return error.message;
   }
 };
+
+export const increaseWalletBalance = async (params) => {
+  try {
+    const response = await http.post("wallet/increase/", params);
+
+    return response.data;
+  } catch (error) {
+    return error.message;
+  }
+};
+
+export const getWalletBalance = async (userId) => {
+  try {
+    const response = await http.get(`wallet/${userId}/`);
+
+    return response.data;
+  } catch (error) {
+    return error.message;
+  }
+};
