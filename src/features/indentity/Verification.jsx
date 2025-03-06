@@ -1,16 +1,17 @@
 import React, {useState} from "react";
 import {useForm} from "react-hook-form";
-import {useLocation, useNavigate} from "react-router";
+import {useNavigate} from "react-router";
 import {Button, InputField} from "../../share-component";
 import {useAuth} from "../../contexts/authContext";
 import {useToast} from "../../contexts/toastContext";
+import {useUserInfo} from "../../contexts/userInfoContext";
 
 const Verification = () => {
   const [isLoading, setIsLoading] = useState();
-  const {state} = useLocation();
   const navigate = useNavigate();
   const {login} = useAuth();
   const {showToast} = useToast();
+  const {userInfo} = useUserInfo();
   const {
     register,
     handleSubmit,
@@ -30,7 +31,7 @@ const Verification = () => {
     }, 2000);
   };
 
-  console.log(state);
+  console.log(userInfo.phoneNumber);
 
   return (
     <div className="w-[300px] sm:w-[370px] px-4 py-8 sm:p-10 max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl  bg-white/40 backdrop-blur-lg rounded-3xl shadow-xl border border-white/30 overflow-hidden mx-auto">
@@ -60,7 +61,7 @@ const Verification = () => {
           <p className="mt-8">
             کد به شماره{" "}
             <span className="text-purple-500 hover:underline text-sm sm:text-base">
-              {state}
+              {userInfo.phoneNumber}
             </span>{" "}
             ارسال شد.
           </p>

@@ -1,6 +1,8 @@
 import React, {useState} from "react";
 import {useForm} from "react-hook-form";
 import {Link, useNavigate} from "react-router";
+import {useUserInfo} from "../../contexts/userInfoContext";
+import {LoginUser} from "../../services/IdentityServices";
 import {Button, InputField} from "../../share-component";
 /**
  *
@@ -8,6 +10,7 @@ import {Button, InputField} from "../../share-component";
  */
 const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const {setUserInfo} = useUserInfo();
   const navigate = useNavigate();
   const {
     register,
@@ -17,12 +20,12 @@ const Login = () => {
 
   const onSubmit = (data) => {
     setIsLoading(true);
-    console.log("Form Data Submitted:", data); // Log the data
-    // Simulate an API call
-    setTimeout(() => {
+
+    LoginUser(data.phoneNumber).then((response) => {
+      setUserInfo(response);
       setIsLoading(false);
-      navigate("/verification", {state: data.phoneNumber});
-    }, 2000);
+      navigate("/verification");
+    });
   };
 
   return (

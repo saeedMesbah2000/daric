@@ -19,7 +19,10 @@ const Home = () => {
   useEffect(() => {
     const fetchUserId = async () => {
       const response = await new Promise((resolve) =>
-        setTimeout(() => resolve({userId: "123456789"}), 1000)
+        setTimeout(
+          () => resolve({userId: "550e8400-e29b-41d4-a716-446655440000"}),
+          1000
+        )
       );
       setUserId(response.userId);
     };

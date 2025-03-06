@@ -6,12 +6,13 @@ const UserInfoContext = createContext();
 
 export const UserInfoProvider = ({children}) => {
   const [userInfo, setUserInfo] = useState({
-    firstName: "سعید",
-    lastName: "مصباح",
-    phoneNumber: "09129630973",
-    email: "",
-    socialSecureNumber: "0024235164",
-    walletValue: "45000",
+    firstName: "",
+    lastName: "",
+    default_payment_amount: "",
+    phoneNumber: "",
+    qr_code_id: "",
+    socialSecureNumber: "",
+    walletBalance: "",
   });
 
   return (
