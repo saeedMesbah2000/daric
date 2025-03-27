@@ -39,3 +39,15 @@ export const getWalletBalance = async (userId) => {
     return error.message;
   }
 };
+
+export const getTransactionHistory = async (inputData) => {
+  try {
+    const response = await http.get(
+      `transaction-history/${inputData.userId}/?start_date=${inputData.startDate}&end_date=${inputData.endDate}`
+    );
+
+    return response.data;
+  } catch (error) {
+    return error.message;
+  }
+};

@@ -103,7 +103,6 @@ const useCalendar = () => {
   }
 
   const result = gregorianToJalali(2024, 3, 12);
-  console.log(result);
 
   // Convert Gregorian date to Jalali (Persian) date
   function gregorianToJalali(gregorianYear, gregorianMonth, gregorianDay) {

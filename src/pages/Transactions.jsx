@@ -1,9 +1,11 @@
-import React from "react";
+import React, {useState} from "react";
 import {useForm} from "react-hook-form";
 import {InputField, Button} from "../share-component";
 import incomeImage from "../assets/add.png";
 import outcomeImage from "../assets/delete.png";
 import useCalendar from "../hooks/useCalendar";
+import {useUserInfo} from "../contexts/userInfoContext";
+import {getTransactionHistory} from "../services/TransactionServices";
 
 const Transactions = () => {
   const {
@@ -12,37 +14,22 @@ const Transactions = () => {
     formState: {errors},
   } = useForm();
   const {gregorianToJalali} = useCalendar();
+  const {userInfo} = useUserInfo();
+  const [isLoading, setIsLoading] = useState(false);
+  const [transactions, setTransactions] = useState([]);
 
   const onSubmitHandler = (event) => {
-    console.log(event);
-  };
+    setIsLoading(true);
 
-  const transactions = [
-    {
-      value: 30000,
-      label: "۳۰,۰۰۰",
-      date: new Date("2024-03-25"),
-      type: "income",
-    },
-    {
-      value: 25000,
-      label: "۲۵,۰۰۰",
-      date: new Date("2024-03-12"),
-      type: "outcome",
-    },
-    {
-      value: 70000,
-      label: "۷۰,۰۰۰",
-      date: new Date("2024-03-17"),
-      type: "income",
-    },
-    {
-      value: 10000,
-      label: "۱۰,۰۰۰",
-      date: new Date("2024-03-30"),
-      type: "outcome",
-    },
-  ];
+    getTransactionHistory({
+      userId: userInfo.id,
+      startDate: event?.startDate,
+      endDate: event?.endDate,
+    }).then((response) => {
+      setTransactions(response);
+      setIsLoading(false);
+    });
+  };
 
   return (
     <form
@@ -60,6 +47,7 @@ const Transactions = () => {
             errors={errors}
             validation={{required: "نوع تراکنش الزامی است!"}}
             options={[
+              {value: "all", label: "همه"},
               {value: "income", label: "واریز"},
               {value: "outcome", label: "برداشت"},
             ]}
@@ -67,7 +55,7 @@ const Transactions = () => {
 
           <div className="flex flex-col sm:flex-row gap-8 sm:gap-4">
             <InputField
-              id="fromDate"
+              id="startDate"
               label="از تاریخ"
               type="date"
               register={register}
@@ -76,7 +64,7 @@ const Transactions = () => {
             />
 
             <InputField
-              id="toDate"
+              id="endDate"
               label="تا تاریخ"
               type="date"
               register={register}
@@ -91,6 +79,7 @@ const Transactions = () => {
           type="submit"
           text="اعمال فیلتر"
           className="mt-4 bg-purple-600 text-white hover:bg-purple-700 transition"
+          loading={isLoading}
         />
 
         <div className="w-full h-1 bg-gray-300 rounded-lg my-6" />
@@ -98,43 +87,51 @@ const Transactions = () => {
         {/* Transactions List */}
         <div className="w-full flex flex-col gap-4 overflow-y-auto ">
           {transactions.map((item, index) => {
-            const jalaliDate = gregorianToJalali(
-              item.date.getFullYear(),
-              item.date.getMonth() + 1,
-              item.date.getDate()
-            );
+            // const jalaliDate = gregorianToJalali(
+            //   item.date.getFullYear(),
+            //   item.date.getMonth() + 1,
+            //   item.date.getDate()
+            // );
 
             return (
               <div
                 key={index}
                 className={`w-full flex justify-between items-center border-2 px-4 py-2 rounded-lg shadow-lg transition-all ${
-                  item.type === "income"
+                  item.transaction_type === "Received"
                     ? "border-green-500 bg-green-50 hover:bg-green-100"
                     : "border-red-500 bg-red-50 hover:bg-red-100"
                 }`}>
                 <div className="flex items-center gap-3">
                   <img
-                    src={item.type === "income" ? incomeImage : outcomeImage}
-                    alt={item.type === "income" ? "Income" : "Outcome"}
+                    src={
+                      item.transaction_type === "Received"
+                        ? incomeImage
+                        : outcomeImage
+                    }
+                    alt={
+                      item.transaction_type === "Received"
+                        ? "Income"
+                        : "Outcome"
+                    }
                     className="w-10 h-10 rounded-full border-2 p-2 shadow-lg"
                   />
                   <p className="text-lg font-medium text-gray-800">
-                    {item.type === "income" ? "واریز" : "برداشت"}
+                    {item.transaction_type === "Received" ? "واریز" : "برداشت"}
                   </p>
                 </div>
 
                 <div className="flex flex-col justify-center items-center text-center">
-                  <p className="text-sm text-gray-600">
+                  {/* <p className="text-sm text-gray-600">
                     {`${jalaliDate.year}/${jalaliDate.month}/${jalaliDate.day}`}
-                  </p>
+                  </p> */}
                   <p className="font-semibold text-xl">
                     <span
                       className={`${
-                        item.type === "income"
+                        item.transaction_type === "Received"
                           ? "text-green-600"
                           : "text-red-600"
                       }`}>
-                      {item.label}
+                      {item.amount}
                     </span>{" "}
                     تومان
                   </p>
