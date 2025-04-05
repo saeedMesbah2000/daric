@@ -36,7 +36,7 @@ const DoTransaction = () => {
           walletBalance: Number(preState?.walletBalance) - Number(data.amount),
         };
       });
-      showToast("افزایش موجودی با موفقیت انجام شد!", "success");
+      showToast("انجام تراکنش با موفقیت انجام شد!", "success");
       navigate("/home");
     });
   };
@@ -57,7 +57,9 @@ const DoTransaction = () => {
         {/* Wallet Balance Display */}
         <div className="bg-purple-100 text-purple-800 text-center py-3 px-6 rounded-lg mb-6">
           موجودی کیف پول شما:{" "}
-          <span className="font-bold">{userInfo.walletBalance} تومان</span>
+          <span className="font-bold">
+            {Math.floor(userInfo.walletBalance)} تومان
+          </span>
         </div>
 
         {/* Payment Form */}
@@ -77,7 +79,9 @@ const DoTransaction = () => {
                 min: {value: 0, message: "حداقل مبلغ ۰ تومان است!"},
                 max: {
                   value: userInfo.walletBalance,
-                  message: `حداکثر مبلغ ${userInfo.walletBalance} تومان است!`,
+                  message: `حداکثر مبلغ ${Math.floor(
+                    userInfo.walletBalance
+                  )} تومان است!`,
                 },
               }}
             />

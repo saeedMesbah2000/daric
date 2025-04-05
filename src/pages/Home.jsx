@@ -98,7 +98,7 @@ const Home = () => {
         </div>
 
         <div className="flex justify-center items-center text-2xl font-semibold text-purple-600 mb-4">
-          {userInfo?.walletBalance}{" "}
+          {Math.floor(userInfo?.walletBalance)}{" "}
           <span className="text-gray-500 text-lg mx-1">تومان</span>
         </div>
 

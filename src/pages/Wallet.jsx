@@ -66,7 +66,7 @@ const Wallet = () => {
         <div className="w-full bg-white border-2 flex flex-col justify-center items-center text-2xl font-semibold text-purple-700 rounded-b-lg shadow-md">
           <p className="w-full text-sm text-gray-600">موجودی:</p>
           <div className="mb-2 text-2xl font-bold text-purple-800">
-            {userInfo?.walletBalance}{" "}
+            {Math.floor(userInfo?.walletBalance)}{" "}
             <span className="text-gray-500 text-lg mx-1">تومان</span>
           </div>
         </div>
